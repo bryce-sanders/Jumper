@@ -9,13 +9,33 @@ class Director:
 
         self.welcome_player()
 
-        while self.game.guessed_wrong < 5:
+        self.game.show_jumper()
+        self.game.show_word()
+        print("""
+        """)
+
+        while not self.game.game_over:
+
+            self.make_guess()
 
             self.game.show_jumper()
             self.game.show_word()
             print("""
             """)
-            self.make_guess()
+            if self.game.guessed_wrong >= 5:
+                self.game.game_over = True
+
+        self.game.show_jumper()
+        self.game.show_word()
+        print("""
+        """)
+
+        if self.game.guessed_wrong >= 5:
+            print("\033[31m" + "You lost the game!" + "\033[39m")
+            self.play_again()
+        else:
+            print("\033[32m" + "You won the game!" + "\033[39m")
+            self.play_again()
 
     def welcome_player(self):
     # Welcome the player!
@@ -36,14 +56,35 @@ Don't get too many guesses wrong, or the jumper will run out of parachute!
 
         if guess.upper() not in alphabet:
 
-            print("You can only guess letters")
+            print("\033[31m" + "#=== You can only guess letters ===#" + "\033[39m")
 
         else:
 
             if guess.upper() in self.game.guessed_letters:
 
-                print(f"You already guessed '{guess.upper}'")
+                print("\033[31m" + f"#=== You already guessed '{guess.upper()}' ===#" + "\033[39m")
 
             else:
 
-                pass
+                if guess.upper() not in self.game.secret_word.word:
+                    print("\033[31m" + f"'{guess.upper()}' is not in the word!" + "\033[39m")
+                    self.game.guessed_wrong += 1
+                    self.game.guessed_letters.append(guess.upper())
+                else:
+                    print("\033[32m" + f"'{guess.upper()}' is in the word!" + "\033[39m")
+                    self.game.guessed_letters.append(guess.upper())
+
+    def play_again(self):
+        choice = input("Would you like to play again? [y / n] ")
+
+        if choice.upper() == "Y":
+            self.game = Game()
+            self.start_game()
+        elif choice.upper() == "N":
+            print("\033[33m" + """
+Okay! Thanks for playing!
+""" + "\033[39m")
+            quit()
+        else:
+            print("\033[31m" + "#=== Invalid Response, Please Try Again ===#" + "\033[39m")
+            self.play_again()

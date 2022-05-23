@@ -8,8 +8,11 @@ class Game:
         self.guessed_letters = []
         self.guessed_wrong = 0
         self.jumper = Jumper()
+        self.game_over = False
 
     def show_word(self):
+        # Keep track of how many letters are still left blank.
+        letters_left = 0
 
         # Print each letter in the word that has already been
         # guessed. Leave letters that have yet to be guessed
@@ -20,6 +23,11 @@ class Game:
                 print(letter, end =" ")
             else:
                 print("_", end =" ")
+                letters_left += 1
+        
+        if letters_left == 0:
+            self.game_over = True
+        
 
     def show_jumper(self):
         jumper = self.jumper.get_stage(self.guessed_wrong)
