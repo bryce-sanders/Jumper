@@ -17,4 +17,4 @@
 # - The program must have at least four classes.
 # - The program must remain true to game play described in the overview.
 
-# Open the 'main.py' file and run it to start the game.
+# Open the '__main__.py' file and run it to start the game.

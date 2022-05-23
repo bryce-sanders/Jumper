@@ -8,4 +8,4 @@ class SecretWord:
     def get_word(self):
         word_list = ["summer", "heat", "pool", "sunny", "relax"]
         self.word =  random.choice(word_list)
-        return self.word
+        return self.word.upper()
