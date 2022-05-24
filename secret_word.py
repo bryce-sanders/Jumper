@@ -11,16 +11,12 @@ class SecretWord:
     Attributes:
         word: The secret word.
 
-    Methods:
-        get_word: Selects and returns a random word that is stored
-                  in the 'word' attribute.
     """
-
     def __init__(self):
         """
         Construct the object with necessary attributes.
         """
-        self.word = self.get_word()
+        self._word = self.get_word()
 
     def get_word(self):
         """
