@@ -1,12 +1,31 @@
 class Jumper:
+  """
+  The person with the parachute.
 
-    def __init__(self):
-        self.stage = ""
+  The responsibility of the Jumper is to visually keep track
+  of how many time the user has made a wrong guess. The more
+  wrong guesses the player has made, the less parachute the
+  Jumper will display.
 
-    def get_stage(self, wrong_guesses):
+  Attributes:
+    stage: The visual appearance of the Jumper.
 
-        if wrong_guesses == 0:
-            self.stage = """
+  """
+  def __init__(self):
+    """
+    Construct the object with necessary attributes.
+    """
+    self.stage = ""
+
+  def get_stage(self, wrong_guesses):
+    """
+    With the number of guesses that the player has gussed wrong,
+    decide and return the correct stage of the jumper.
+    """
+    # Decide which stage is correct with the wrong_guesses
+    # number provided.
+    if wrong_guesses == 0:
+      self.stage = """
      _____
     /_____\\
     \     /
@@ -16,8 +35,8 @@ class Jumper:
       / \\
 
 """
-        elif wrong_guesses == 1:
-            self.stage = """
+    elif wrong_guesses == 1:
+      self.stage = """
  
     /_____\\
     \     /
@@ -28,8 +47,8 @@ class Jumper:
 
 """
 
-        elif wrong_guesses == 2:
-            self.stage = """
+    elif wrong_guesses == 2:
+      self.stage = """
 
      _____
     \     /
@@ -40,8 +59,8 @@ class Jumper:
 
 """
 
-        elif wrong_guesses == 3:
-            self.stage = """
+    elif wrong_guesses == 3:
+      self.stage = """
 
 
     \     /
@@ -52,8 +71,8 @@ class Jumper:
 
 """
 
-        elif wrong_guesses == 4:
-            self.stage = """
+    elif wrong_guesses == 4:
+      self.stage = """
 
 
 
@@ -64,8 +83,8 @@ class Jumper:
 
 """
 
-        elif wrong_guesses <= 5:
-            self.stage = """
+    elif wrong_guesses <= 5:
+      self.stage = """
 
 
 
@@ -75,5 +94,5 @@ class Jumper:
       / \\
 
 """
-
-        return self.stage
+    # Return the stage of the Jumper.
+    return self.stage
