@@ -23,12 +23,12 @@ class SecretWord:
         """
         Construct the object with necessary attributes.
         """
-        self.__word = self.get_word()
+        self.__word = self.set_word()
         self.guessed_letters = []
         self.letters_left = 0
         self.guessed_wrong = 0
 
-    def get_word(self):
+    def set_word(self):
         """
         Selects and returns a random word from the list.
         """
