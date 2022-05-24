@@ -45,7 +45,7 @@ class Game:
         # guessed. Leave letters that have yet to be guessed
         # as '_'.
         print("The word is...")
-        for letter in self.secret_word._word:
+        for letter in self.secret_word.word:
             if letter in self.guessed_letters:
                 print(letter, end =" ")
             else:

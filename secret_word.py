@@ -16,7 +16,7 @@ class SecretWord:
         """
         Construct the object with necessary attributes.
         """
-        self._word = self.get_word()
+        self.word = self.get_word()
 
     def get_word(self):
         """
