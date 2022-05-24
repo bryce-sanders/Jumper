@@ -15,7 +15,7 @@ class Jumper:
     """
     Construct the object with necessary attributes.
     """
-    self.stage = ""
+    self.__stage = ""
 
   def get_stage(self, wrong_guesses):
     """
@@ -25,7 +25,7 @@ class Jumper:
     # Decide which stage is correct with the wrong_guesses
     # number provided.
     if wrong_guesses == 0:
-      self.stage = """
+      self.__stage = """
      _____
     /_____\\
     \     /
@@ -36,7 +36,7 @@ class Jumper:
 
 """
     elif wrong_guesses == 1:
-      self.stage = """
+      self.__stage = """
  
     /_____\\
     \     /
@@ -48,7 +48,7 @@ class Jumper:
 """
 
     elif wrong_guesses == 2:
-      self.stage = """
+      self.__stage = """
 
      _____
     \     /
@@ -60,7 +60,7 @@ class Jumper:
 """
 
     elif wrong_guesses == 3:
-      self.stage = """
+      self.__stage = """
 
 
     \     /
@@ -72,7 +72,7 @@ class Jumper:
 """
 
     elif wrong_guesses == 4:
-      self.stage = """
+      self.__stage = """
 
 
 
@@ -84,7 +84,7 @@ class Jumper:
 """
 
     elif wrong_guesses <= 5:
-      self.stage = """
+      self.__stage = """
 
 
 
@@ -95,4 +95,14 @@ class Jumper:
 
 """
     # Return the stage of the Jumper.
-    return self.stage
+    return self.__stage
+
+  def show_jumper(self, guessed_wrong):
+        """
+        Displays the current state of the jumper.
+        """
+        # Pass the Jumper the number of incorrect guesses
+        # the player has made and then print the current
+        # state of the jumper.
+        self.stage = self.get_stage(guessed_wrong)
+        print(self.stage)

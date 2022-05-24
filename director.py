@@ -33,8 +33,7 @@ Don't get too many guesses wrong, or the jumper will run out of parachute!
 
         # Print the initial Jumper and show how many letters are
         # in the secret word.
-        self.game.show_jumper()
-        self.game.show_word()
+        self.game.show_all()
         print("""
         """)
 
@@ -46,20 +45,15 @@ Don't get too many guesses wrong, or the jumper will run out of parachute!
             self.make_guess()
 
             # Display the current state of the secret word and the jumper.
-            self.game.show_jumper()
-            self.game.show_word()
+            self.game.show_all()
             print("""
             """)
 
-            # Check if the player is out of guesses.
-            if self.game.guessed_wrong >= 5:
-                self.game.game_over = True
-
-
+            self.check_for_game_over()
 
         # If the player has lost, inform them and ask if they would like to
         # play again.
-        if self.game.guessed_wrong >= 5:
+        if self.game.secret_word.guessed_wrong >= 5:
             print("\033[31m" + "You lost the game!" + "\033[39m")
             self.play_again()
 
@@ -88,30 +82,24 @@ Don't get too many guesses wrong, or the jumper will run out of parachute!
         # them again.
         if guess.upper() not in alphabet:
 
-            print("\033[31m" + "#=== You can only guess single letters ===#" + "\033[39m")
+            print("\033[33m" + "#=== You can only guess single letters ===#" + "\033[39m")
 
         else:
 
-            # Check if the player has already guessed the letter that they entered.
-            if guess.upper() in self.game.guessed_letters:
+            self.game.secret_word.check_guess(guess)
 
-                print("\033[31m" + f"#=== You already guessed '{guess.upper()}' ===#" + "\033[39m")
+    def check_for_game_over(self):
+        """
+        Check to see if the player has won or lost.
+        """
+        # Check if the player is out of guesses and has lost.
+        if self.game.secret_word.guessed_wrong >= 5:
+            self.game.game_over = True
 
-            else:
-
-                # If the letter the player guessed is not in the secret word, inform
-                # the player and add to their 'guessed_wrong' count. Add the guessed
-                # letter to the 'guessed_letters' list.
-                if guess.upper() not in self.game.secret_word.word:
-                    print("\033[31m" + f"'{guess.upper()}' is not in the word!" + "\033[39m")
-                    self.game.guessed_wrong += 1
-                    self.game.guessed_letters.append(guess.upper())
-                
-                # If the letter the player guessed is in the secret word, inform
-                # the player. Add the guessed letter to the 'guessed_letters' list.
-                else:
-                    print("\033[32m" + f"'{guess.upper()}' is in the word!" + "\033[39m")
-                    self.game.guessed_letters.append(guess.upper())
+        # Check if the secret word is all filled in and the
+        # player has won.
+        elif self.game.secret_word.letters_left == 0:
+            self.game.game_over = True
 
     def play_again(self):
         """
