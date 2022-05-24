@@ -51,22 +51,22 @@ Don't get too many guesses wrong, or the jumper will run out of parachute!
 
             self.check_for_game_over()
 
-        # If the player has lost, inform them and ask if they would like to
-        # play again.
+        # If the player has lost, inform them and ask if they would
+        # like to play again.
         if self.game.secret_word.guessed_wrong >= 5:
             print("\033[31m" + "You lost the game!" + "\033[39m")
             self.play_again()
 
-        # If the player has won, congratulate them and ask if they would like
-        # to play again.
+        # If the player has won, congratulate them and ask if they
+        # would like to play again.
         else:
             print("\033[32m" + "You won the game!" + "\033[39m")
             self.play_again()
 
     def make_guess(self):
         """
-        Prompt the user to make a guess. If they don't guess a valid letter,
-        inform the player and prompt them again.
+        Prompt the user to make a guess. If they don't guess a valid
+        letter, inform the player and prompt them again.
         """
         # Create a list to keep track of each letter in the alphabet.
         alphabet = [
@@ -125,5 +125,7 @@ Okay! Thanks for playing!
         # If the user enters an invalid response, inform them, and prompt
         # them for a new answer.
         else:
+            print()
             print("\033[31m" + "#=== Invalid Response, Please Try Again ===#" + "\033[39m")
+            print()
             self.play_again()
